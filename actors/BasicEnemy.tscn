@@ -1,18 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://yd55x83mdako"]
+[gd_scene load_steps=2 format=3 uid="uid://icb1vkpk6skw"]
 
-[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_rnysw"]
+[ext_resource type="PackedScene" uid="uid://cvdv8ujujwdxb" path="res://actors/MovingObjectBase.tscn" id="1_aq0s6"]
 
-[node name="BasicEnemy" type="Node"]
+[node name="MovingObjectBase" instance=ExtResource("1_aq0s6")]
 
-[node name="Enemy" type="CharacterBody2D" parent="."]
-position = Vector2(1127, -2)
-script = ExtResource("1_rnysw")
-
-[node name="Polygon2D" type="Polygon2D" parent="Enemy"]
+[node name="Polygon2D" type="Polygon2D" parent="." index="0"]
 position = Vector2(-28.2, 67.5)
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(76, 483, 76, 412, 113, 412, 113, 483)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
 position = Vector2(7.80005, 396.5)
 polygon = PackedVector2Array(31, 79, 31, 154, 77, 154, 77, 115.445, 77, 79)

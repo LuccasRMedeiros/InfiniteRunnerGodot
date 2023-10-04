@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://vk16t3j3pf1"]
+[gd_scene load_steps=2 format=3 uid="uid://vk16t3j3pf1"]
+
+[ext_resource type="Script" path="res://actors/Player.gd" id="1_16m0v"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_16m0v")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(-96.2, -446.5)

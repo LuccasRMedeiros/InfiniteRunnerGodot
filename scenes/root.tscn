@@ -1,24 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtg70jk4qkify"]
+[gd_scene load_steps=5 format=3 uid="uid://dtg70jk4qkify"]
 
-[ext_resource type="PackedScene" uid="uid://yd55x83mdako" path="res://actors/BasicEnemy.tscn" id="1_ayies"]
+[ext_resource type="Script" path="res://scenes/enemy_spawner.gd" id="1_8ivwv"]
+[ext_resource type="PackedScene" uid="uid://icb1vkpk6skw" path="res://actors/BasicEnemy.tscn" id="1_ayies"]
+[ext_resource type="PackedScene" uid="uid://vk16t3j3pf1" path="res://actors/Player.tscn" id="2_hs00m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w317v"]
+size = Vector2(85.1424, 20)
 
 [node name="Root" type="Node2D"]
+script = ExtResource("1_8ivwv")
 
-[node name="Floor" type="Polygon2D" parent="."]
+[node name="Floor" type="StaticBody2D" parent="."]
+
+[node name="FloorColor" type="Polygon2D" parent="Floor"]
 position = Vector2(-18.4371, 50.4502)
 scale = Vector2(3.56287, 1.45)
 color = Color(0, 0.87451, 0.137255, 1)
 polygon = PackedVector2Array(-1, 339, 333, 339, 333, 439, 167, 439, -1, 439)
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="FloorColisionShape" type="CollisionShape2D" parent="Floor"]
+position = Vector2(571, 606)
+scale = Vector2(14.04, 4.08)
+shape = SubResource("RectangleShape2D_w317v")
 
-[node name="Polygon2D" type="Polygon2D" parent="Player"]
-position = Vector2(-48, 68)
-color = Color(0, 1, 1, 1)
-polygon = PackedVector2Array(76, 483, 76, 412, 113, 412, 113, 483)
+[node name="Roof" type="StaticBody2D" parent="."]
+position = Vector2(0, -648)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
-position = Vector2(-3, 397)
-polygon = PackedVector2Array(31, 79, 31, 154, 77, 154, 77, 79)
+[node name="RoofColor" type="Polygon2D" parent="Roof"]
+position = Vector2(-18.4371, 50.4502)
+scale = Vector2(3.56287, 1.45)
+color = Color(0, 0.87451, 0.137255, 1)
+polygon = PackedVector2Array(-1, 339, 333, 339, 333, 439, 167, 439, -1, 439)
+
+[node name="RoofColisionShape" type="CollisionShape2D" parent="Roof"]
+position = Vector2(571, 632)
+scale = Vector2(14.04, 4.08)
+shape = SubResource("RectangleShape2D_w317v")
 
 [node name="BasicEnemy" parent="." instance=ExtResource("1_ayies")]
+position = Vector2(1128, 16)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_hs00m")]
+position = Vector2(56, 528)
