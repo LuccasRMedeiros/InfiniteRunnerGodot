@@ -1,14 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://icb1vkpk6skw"]
+[gd_scene load_steps=3 format=3 uid="uid://pc1pkakhtjhr"]
 
-[ext_resource type="PackedScene" uid="uid://cvdv8ujujwdxb" path="res://actors/MovingObjectBase.tscn" id="1_aq0s6"]
+[ext_resource type="Script" path="res://actors/BasicEnemy.gd" id="1_7ssgm"]
 
-[node name="MovingObjectBase" instance=ExtResource("1_aq0s6")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o61cf"]
+size = Vector2(72, 136)
 
-[node name="Polygon2D" type="Polygon2D" parent="." index="0"]
-position = Vector2(-28.2, 67.5)
+[node name="BasicEnemy" type="Area2D"]
+script = ExtResource("1_7ssgm")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(1, 0, 0, 1)
-polygon = PackedVector2Array(76, 483, 76, 412, 113, 412, 113, 483)
+polygon = PackedVector2Array(0, 0, 0, 128, 64, 128, 64, 0)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
-position = Vector2(7.80005, 396.5)
-polygon = PackedVector2Array(31, 79, 31, 154, 77, 154, 77, 115.445, 77, 79)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(28, 60)
+shape = SubResource("RectangleShape2D_o61cf")

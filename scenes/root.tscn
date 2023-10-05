@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtg70jk4qkify"]
+[gd_scene load_steps=4 format=3 uid="uid://dtg70jk4qkify"]
 
 [ext_resource type="Script" path="res://scenes/enemy_spawner.gd" id="1_8ivwv"]
-[ext_resource type="PackedScene" uid="uid://icb1vkpk6skw" path="res://actors/BasicEnemy.tscn" id="1_ayies"]
 [ext_resource type="PackedScene" uid="uid://vk16t3j3pf1" path="res://actors/Player.tscn" id="2_hs00m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w317v"]
@@ -19,7 +18,7 @@ color = Color(0, 0.87451, 0.137255, 1)
 polygon = PackedVector2Array(-1, 339, 333, 339, 333, 439, 167, 439, -1, 439)
 
 [node name="FloorColisionShape" type="CollisionShape2D" parent="Floor"]
-position = Vector2(571, 606)
+position = Vector2(576, 608)
 scale = Vector2(14.04, 4.08)
 shape = SubResource("RectangleShape2D_w317v")
 
@@ -36,9 +35,6 @@ polygon = PackedVector2Array(-1, 339, 333, 339, 333, 439, 167, 439, -1, 439)
 position = Vector2(571, 632)
 scale = Vector2(14.04, 4.08)
 shape = SubResource("RectangleShape2D_w317v")
-
-[node name="BasicEnemy" parent="." instance=ExtResource("1_ayies")]
-position = Vector2(1128, 16)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_hs00m")]
 position = Vector2(56, 528)
