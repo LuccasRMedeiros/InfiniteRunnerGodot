@@ -1,23 +1,31 @@
-extends Node2D
+extends Node
 
-const ENEMY_SPAWN_CHANCE = 1.0 / 2.0
-var ENEMY_SPAWN_TRIGGER: float
+const SPAWN_CHANCE = 0.5
+var SPAWN_TRIGGER = 0.0
 
-func _ready():
-	# Grants that ENEMY_SPAWN_TRIGGER is always initialized to 0
-	ENEMY_SPAWN_TRIGGER = 0.0
+var rng = RandomNumberGenerator.new()
+
+func get_object_from_index(idx: int) -> Node:
+	match idx:
+		0:
+			return preload("res://actors/Wall.tscn").instantiate()
+		1:
+			return preload("res://actors/Bar.tscn").instantiate()
+
+	return preload("res://actors/InvertedBar.tscn").instantiate()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	SPAWN_TRIGGER += SPAWN_CHANCE * delta
 
-	ENEMY_SPAWN_TRIGGER += ENEMY_SPAWN_CHANCE * delta
+	if SPAWN_TRIGGER >= 1.0:
+		var obstacle: Node
+		var rand_obj_idx = rng.randi_range(0, 2)
+		var rand_y = rng.randi_range(520, 80)
 
-	if ENEMY_SPAWN_TRIGGER >= 1.0:	
-		ENEMY_SPAWN_TRIGGER = 0.0
+		obstacle = get_object_from_index(rand_obj_idx)
+		obstacle.position.y = rand_y
 
-		var enemy = preload("res://actors/BasicEnemy.tscn").instantiate()
-		enemy.position.x = 1216
-		enemy.position.y = 440
-		enemy.mov_speed = 300.0
+		add_child(obstacle)
 
-		add_child(enemy)
+		SPAWN_TRIGGER = 0.0

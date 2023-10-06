@@ -1,3 +1,5 @@
+class_name Player
+
 extends CharacterBody2D
 
 const JUMP_VELOCITY = -400.0
@@ -15,3 +17,6 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 
 	move_and_slide()
+
+func _on_tree_exited():
+	Globals.global_speed = 0.0

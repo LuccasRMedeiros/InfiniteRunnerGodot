@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtg70jk4qkify"]
+[gd_scene load_steps=8 format=3 uid="uid://dtg70jk4qkify"]
 
 [ext_resource type="Script" path="res://scenes/enemy_spawner.gd" id="1_8ivwv"]
+[ext_resource type="Script" path="res://scenes/coin_spawner.gd" id="1_du26c"]
+[ext_resource type="Script" path="res://scenes/MainGame.gd" id="1_lhqep"]
 [ext_resource type="PackedScene" uid="uid://vk16t3j3pf1" path="res://actors/Player.tscn" id="2_hs00m"]
+[ext_resource type="Script" path="res://scenes/Distance.gd" id="5_an6e3"]
+[ext_resource type="Script" path="res://scenes/Coins.gd" id="6_1bgvs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w317v"]
 size = Vector2(85.1424, 20)
 
 [node name="Root" type="Node2D"]
-script = ExtResource("1_8ivwv")
+script = ExtResource("1_lhqep")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 
@@ -38,3 +42,26 @@ shape = SubResource("RectangleShape2D_w317v")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_hs00m")]
 position = Vector2(56, 528)
+
+[node name="ObstacleSpawner" type="Node2D" parent="."]
+position = Vector2(1216, 0)
+script = ExtResource("1_8ivwv")
+
+[node name="CoinSpawner" type="Node2D" parent="."]
+position = Vector2(1216, 0)
+script = ExtResource("1_du26c")
+
+[node name="Distance" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Distance: "
+script = ExtResource("5_an6e3")
+
+[node name="Coins" type="Label" parent="."]
+offset_left = 576.0
+offset_right = 616.0
+offset_bottom = 23.0
+text = "Coins: "
+script = ExtResource("6_1bgvs")
+
+[connection signal="tree_exited" from="CharacterBody2D" to="CharacterBody2D" method="_on_tree_exited"]

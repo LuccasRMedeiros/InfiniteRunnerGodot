@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" path="res://actors/Player.gd" id="1_16m0v"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_16m0v")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]

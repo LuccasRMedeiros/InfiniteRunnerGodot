@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj1255l3hyjxk"]
+
+[ext_resource type="PackedScene" uid="uid://bq2516i2gv8ua" path="res://actors/Coin.tscn" id="1_e8yeq"]
+
+[node name="CoinGroup" type="Node2D"]
+
+[node name="Coin10" parent="." instance=ExtResource("1_e8yeq")]
+position = Vector2(-40, -16)
+mov_speed = 300.0
+
+[node name="Coin12" parent="." instance=ExtResource("1_e8yeq")]
+position = Vector2(-40, 8)
+mov_speed = 300.0
+
+[node name="Coin13" parent="." instance=ExtResource("1_e8yeq")]
+position = Vector2(-16, -16)
+mov_speed = 300.0
+
+[node name="Coin14" parent="." instance=ExtResource("1_e8yeq")]
+position = Vector2(8, -16)
+mov_speed = 300.0
+
+[node name="Coin15" parent="." instance=ExtResource("1_e8yeq")]
+position = Vector2(-16, 8)
+mov_speed = 300.0
+
+[node name="Coin16" parent="." instance=ExtResource("1_e8yeq")]
+position = Vector2(8, 8)
+mov_speed = 300.0
+
+[node name="Coin53" parent="." instance=ExtResource("1_e8yeq")]
+position = Vector2(32, -16)
+mov_speed = 300.0
+
+[node name="Coin55" parent="." instance=ExtResource("1_e8yeq")]
+position = Vector2(32, 8)
+mov_speed = 300.0
