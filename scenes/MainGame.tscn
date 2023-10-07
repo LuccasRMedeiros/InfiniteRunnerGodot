@@ -1,0 +1,110 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtg70jk4qkify"]
+
+[ext_resource type="Script" path="res://scripts/MainGame.gd" id="1_7bhun"]
+[ext_resource type="PackedScene" uid="uid://vk16t3j3pf1" path="res://actors/Player.tscn" id="2_m2k5i"]
+[ext_resource type="Script" path="res://scripts/EnemySpawner.gd" id="3_6wrci"]
+[ext_resource type="Script" path="res://scripts/CoinSpawner.gd" id="4_e82yl"]
+[ext_resource type="Script" path="res://scripts/Distance.gd" id="5_u7od4"]
+[ext_resource type="Script" path="res://scripts/ScoreCoins.gd" id="6_owm2x"]
+[ext_resource type="Script" path="res://scripts/Speed.gd" id="7_fejq6"]
+[ext_resource type="Script" path="res://scripts/ButtonStart.gd" id="8_02t7e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w317v"]
+size = Vector2(85.1424, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_om3ir"]
+size = Vector2(2.61729, 2.24598)
+
+[node name="Root" type="Node2D"]
+script = ExtResource("1_7bhun")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+
+[node name="FloorColor" type="Polygon2D" parent="Floor"]
+position = Vector2(-18.4371, 50.4502)
+scale = Vector2(3.56287, 1.45)
+color = Color(0, 0.87451, 0.137255, 1)
+polygon = PackedVector2Array(-1, 339, 333, 339, 333, 439, 167, 439, -1, 439)
+
+[node name="FloorColisionShape" type="CollisionShape2D" parent="Floor"]
+position = Vector2(576, 608)
+scale = Vector2(14.04, 4.08)
+shape = SubResource("RectangleShape2D_w317v")
+
+[node name="Roof" type="StaticBody2D" parent="."]
+position = Vector2(0, -648)
+
+[node name="RoofColor" type="Polygon2D" parent="Roof"]
+position = Vector2(-18.4371, 50.4502)
+scale = Vector2(3.56287, 1.45)
+color = Color(0, 0.87451, 0.137255, 1)
+polygon = PackedVector2Array(-1, 339, 333, 339, 333, 439, 167, 439, -1, 439)
+
+[node name="RoofColisionShape" type="CollisionShape2D" parent="Roof"]
+position = Vector2(571, 632)
+scale = Vector2(14.04, 4.08)
+shape = SubResource("RectangleShape2D_w317v")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_m2k5i")]
+position = Vector2(56, 528)
+
+[node name="ObstacleSpawner" type="Node2D" parent="."]
+position = Vector2(1216, 0)
+script = ExtResource("3_6wrci")
+
+[node name="CoinSpawner" type="Node2D" parent="."]
+position = Vector2(1216, 0)
+script = ExtResource("4_e82yl")
+
+[node name="Distance" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Distance: "
+script = ExtResource("5_u7od4")
+
+[node name="Coins" type="Label" parent="."]
+offset_left = 576.0
+offset_right = 616.0
+offset_bottom = 23.0
+text = "Coins: "
+script = ExtResource("6_owm2x")
+
+[node name="Speed" type="Label" parent="."]
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 39.0
+text = "Speed:
+"
+script = ExtResource("7_fejq6")
+
+[node name="ButtonStart" type="Area2D" parent="."]
+script = ExtResource("8_02t7e")
+
+[node name="ButtonShape" type="Polygon2D" parent="ButtonStart"]
+color = Color(0.25098, 0.25098, 0.25098, 1)
+polygon = PackedVector2Array(448, 256, 448, 384, 704, 384, 704, 256)
+
+[node name="ButtonCollisionShape" type="CollisionShape2D" parent="ButtonStart"]
+position = Vector2(576, 320)
+rotation = -3.14159
+scale = Vector2(97.811, 56.9907)
+shape = SubResource("RectangleShape2D_om3ir")
+
+[node name="ButtonLabel" type="Label" parent="ButtonStart"]
+offset_left = 512.0
+offset_top = 296.0
+offset_right = 640.0
+offset_bottom = 344.0
+text = "Iniciar
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="game_started" from="." to="CharacterBody2D" method="_on_root_game_started"]
+[connection signal="player_died" from="CharacterBody2D" to="." method="_on_character_body_2d_player_died"]
+[connection signal="player_died" from="CharacterBody2D" to="ButtonStart" method="_on_character_body_2d_player_died"]
+[connection signal="tree_exited" from="CharacterBody2D" to="CharacterBody2D" method="_on_tree_exited"]
+[connection signal="mouse_entered" from="ButtonStart" to="ButtonStart" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ButtonStart" to="ButtonStart" method="_on_mouse_exited"]
+[connection signal="started_game" from="ButtonStart" to="." method="_on_button_start_started_game"]

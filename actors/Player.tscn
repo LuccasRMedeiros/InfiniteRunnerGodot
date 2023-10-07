@@ -1,17 +1,155 @@
-[gd_scene load_steps=2 format=3 uid="uid://vk16t3j3pf1"]
+[gd_scene load_steps=12 format=3 uid="uid://vk16t3j3pf1"]
 
 [ext_resource type="Script" path="res://actors/Player.gd" id="1_16m0v"]
+[ext_resource type="Texture2D" uid="uid://b4etqk8lsqtlj" path="res://sprites/Warrior_Sheet-Effect.png" id="2_ebd7t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vt7d"]
+size = Vector2(33, 53)
+
+[sub_resource type="Animation" id="Animation_un0kq"]
+resource_name = "Death"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+}
+
+[sub_resource type="Animation" id="Animation_l8rgk"]
+resource_name = "Falling"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [45, 46, 48]
+}
+
+[sub_resource type="Animation" id="Animation_6dke4"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_03etw"]
+resource_name = "Jumping"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [41, 42, 43]
+}
+
+[sub_resource type="Animation" id="Animation_2582p"]
+resource_name = "Jumping_to_Falling"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [44]
+}
+
+[sub_resource type="Animation" id="Animation_rxe7d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_i4pq0"]
+resource_name = "Running"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 12, 13]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gs2l4"]
+_data = {
+"Death": SubResource("Animation_un0kq"),
+"Falling": SubResource("Animation_l8rgk"),
+"Idle": SubResource("Animation_6dke4"),
+"Jumping": SubResource("Animation_03etw"),
+"Jumping_to_Falling": SubResource("Animation_2582p"),
+"RESET": SubResource("Animation_rxe7d"),
+"Running": SubResource("Animation_i4pq0")
+}
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_16m0v")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(-96.2, -446.5)
-color = Color(0, 1, 1, 1)
-polygon = PackedVector2Array(76, 483, 76, 412, 113, 412, 113, 483)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9, -2)
+scale = Vector2(1.41667, 1.41667)
+texture = ExtResource("2_ebd7t")
+hframes = 6
+vframes = 17
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-51.2, -117.5)
-polygon = PackedVector2Array(31, 79, 31, 154, 77, 154, 77, 79)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 5.5)
+shape = SubResource("RectangleShape2D_3vt7d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gs2l4")
+}
